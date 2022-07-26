@@ -75,6 +75,16 @@ public class BrowserUtils {
         }
     }
 
+    //wait till URL contains a specific text
+    public static void waitForTitleContains(String titlePart, int timeOut) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, timeOut);
+            wait.until(ExpectedConditions.titleContains(titlePart));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     //wait for visibility of a web element
     public static void waitForVisibility(WebElement element, int timeOut) {
         try {

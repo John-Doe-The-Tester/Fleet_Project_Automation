@@ -21,10 +21,10 @@ public abstract class BasePage {
 		PageFactory.initElements(driver, this);
 	}
 
-		//---locators----------------
-		@FindBy(css = "div[class='loader-mask shown']")
-		@CacheLookup
-		protected WebElement loaderMask;
+	//---locators----------------
+	@FindBy(css = "div[class='loader-mask shown']")
+	@CacheLookup
+	protected WebElement loaderMask;
 
 
 	public void waitUntilLoaderScreenDisappear() {
@@ -36,22 +36,30 @@ public abstract class BasePage {
 		}
 	}
 
-	public void goToModule(String menuName){ //Fleet
+	public String getPageTitle(){
+		return driver.getTitle();
+	}
+
+	public void goToModule(String menuName) { //Fleet
 		driver.findElement(By.xpath("//span[text()[normalize-space() = '" + menuName + "']]")).click();
 	}
 
-	public void goToModule(String menuName, String subMenuName){ //Fleet - Vehicles
+	public void goToModule(String menuName, String subMenuName) { //Fleet - Vehicles
 		driver.findElement(By.xpath("//span[text()[normalize-space() = '" + menuName + "']]")).click();
 		BrowserUtils.wait(1);
 		driver.findElement(By.xpath("//span[text()[normalize-space() = '" + subMenuName + "']]")).click();
 	}
 
-	public void goToModule(String menuName, String subMenuName, String subSubmenu){
+	public void goToModule(String menuName, String subMenuName, String subSubmenu) {
 		driver.findElement(By.xpath("//span[text()[normalize-space() = '" + menuName + "']]")).click();
 		BrowserUtils.wait(1);
 		driver.findElement(By.xpath("//span[text()[normalize-space() = '" + subMenuName + "']]")).click();
 		BrowserUtils.wait(1);
 		driver.findElement(By.xpath("//span[text()[normalize-space() = '" + subSubmenu + "']]")).click();
+	}
+
+	public void goBack(){
+		driver.navigate().back();
 	}
 
 

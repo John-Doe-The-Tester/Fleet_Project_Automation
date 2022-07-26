@@ -87,7 +87,7 @@ Feature: Login
     Then The user is on the "Quick Launchpad" page
 
 
-  @wip
+
   #This cenario will fail because we don't see the same username in the profile menu
   Scenario: AC-8: All users can see their usernames in profile menu
     And The user logs in with following credentials map

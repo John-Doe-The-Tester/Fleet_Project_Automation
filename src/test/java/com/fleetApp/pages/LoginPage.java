@@ -32,7 +32,6 @@ public class LoginPage extends BasePage {
 	//---methods-----------------
 
 	public void goLoginPage() {
-
 		driver.get(ConfigurationReader.get("url"));
 	}
 
@@ -75,9 +74,6 @@ public class LoginPage extends BasePage {
 		loginBtn.click();
 	}
 
-	public String getPageTitle(){
-		return driver.getTitle();
-	}
 
 	//method overloading
 	public String getWarningMessage(String field){
