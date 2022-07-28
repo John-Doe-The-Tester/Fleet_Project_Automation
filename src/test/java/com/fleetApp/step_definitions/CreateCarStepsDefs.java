@@ -1,0 +1,39 @@
+package com.fleetApp.step_definitions;
+
+import com.fleetApp.pages.CreateCarPage;
+import com.fleetApp.pages.DashboardPage;
+import com.fleetApp.utilities.BrowserUtils;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
+
+public class CreateCarStepsDefs {
+
+    CreateCarPage createCarPage = new CreateCarPage();
+    DashboardPage dashboardPage= new DashboardPage();
+
+    @And("the user navigates to {string} {string}")
+    public void theUserNavigatesTo(String tab, String module) {
+        dashboardPage.goToModule(tab, module);
+
+    }
+
+    @Then("the user clicks on Create Car button")
+    public void theUserClicksOnCreateCarButton() {
+        createCarPage.waitUntilLoaderScreenDisappear();
+        BrowserUtils.clickWithJSExe(createCarPage.createCarButton);
+    }
+
+    @And("the user enters new Car information")
+    public void theUserEntersNewCarInformation() throws InterruptedException {
+        createCarPage.newCarGenerator();
+
+    }
+
+    @Then("the user clicks on save changes button")
+    public void theUserClicksOnSaveChangesButton() {
+
+        createCarPage.saveAndCloseButton.click();
+
+
+    }
+}
