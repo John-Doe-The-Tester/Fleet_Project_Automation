@@ -54,6 +54,12 @@ public class BrowserUtils {
         element.click();
     }
 
+    //wait for clickability of an element then click
+    public static void clickWithWait(By by, int timeOut){
+        waitClickability(by,timeOut);
+        Driver.get().findElement(by).click();
+    }
+
     public static void waitUntilNumberOfWindows(int number){
         WebDriverWait wait = new WebDriverWait(driver, 5);
         wait.until(ExpectedConditions.numberOfWindowsToBe(number));
