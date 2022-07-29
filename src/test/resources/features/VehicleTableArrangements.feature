@@ -29,10 +29,21 @@ Feature: Add Event
       | 50      |
       | 100     |
 
-  @wip
-  Scenario: AC 4- User can sort any column
-      When The user clicks on "Model Year" column in the table
-      Then The "Model Year" column is sorted in "ascending" order
 
-      When The user clicks on "Model Year" column again
-      Then The "Model Year" column is sorted in "descending" order
+  Scenario Outline: AC 4- User can sort any column
+    When The user clicks on "<column>" column in the table
+    Then The "<column>" column is sorted in "<order1>" order
+
+    When The user clicks on "<column>" column again
+    Then The "<column>" column is sorted in "<order2>" order
+
+    Examples:
+      | column        | order1    | order2     |
+      | Model Year    | ascending | descending |
+      | Driver        | ascending | descending |
+      | Location      | ascending | descending |
+      | Last Odometer | ascending | descending |
+
+
+  @wip
+  Scenario: AC 5- Remove sortings by reset button

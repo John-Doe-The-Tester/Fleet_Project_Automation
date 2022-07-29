@@ -117,6 +117,7 @@ public class VehicleAllCarsPage extends BasePage {
 			System.out.println("expected list: " + expetedValuesString);
 			System.out.println("actual list: " + actualValuesString);
 		} else if (order.toLowerCase().equals("descending")) {
+			//sort in descending order
 			Collections.sort(actualValuesString,Collections.reverseOrder());
 			Assert.assertEquals(expetedValuesString,actualValuesString);
 
