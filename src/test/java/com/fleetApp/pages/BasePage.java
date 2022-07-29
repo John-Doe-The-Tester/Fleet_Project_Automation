@@ -43,26 +43,26 @@ public abstract class BasePage {
 
 	public void navigateToModule(String menuName) { //Fleet
 		WebElement menu1 = driver.findElement(By.xpath("//span[text()[normalize-space() = '" + menuName + "']]"));
-		menu1.click();
+		BrowserUtils.clickWithWait(menu1,2);
 	}
 
 	public void navigateToModule(String menuName, String subMenuName) { //Fleet - Vehicles
 		WebElement menu1 = driver.findElement(By.xpath("//span[text()[normalize-space() = '" + menuName + "']]"));
-		BrowserUtils.clickWithWait(menu1,1);
+		BrowserUtils.clickWithWait(menu1,2);
 
 		WebElement menu2 = driver.findElement(By.xpath("//span[text()[normalize-space() = '" + subMenuName + "']]"));
-		BrowserUtils.clickWithWait(menu2,1);
+		BrowserUtils.clickWithWait(menu2,2);
 	}
 
 	public void navigateToModule(String menuName, String subMenuName, String subSubmenu) {
 		WebElement menu1 = driver.findElement(By.xpath("//span[text()[normalize-space() = '" + menuName + "']]"));
-		BrowserUtils.clickWithWait(menu1,1);
+		BrowserUtils.clickWithWait(menu1,2);
 
 		WebElement menu2 = driver.findElement(By.xpath("//span[text()[normalize-space() = '" + subMenuName + "']]"));
-		BrowserUtils.clickWithWait(menu2,1);
+		BrowserUtils.clickWithWait(menu2,2);
 
 		WebElement menu3 = driver.findElement(By.xpath("//span[text()[normalize-space() = '" + subSubmenu + "']]"));
-		BrowserUtils.clickWithWait(menu3,1);
+		BrowserUtils.clickWithWait(menu3,2);
 	}
 
 	public void goBack(){

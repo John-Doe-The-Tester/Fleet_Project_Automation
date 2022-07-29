@@ -39,7 +39,6 @@
         | Monthly |
         | Yearly  |
 
-    @wip
     Scenario: AC 5b- Ending Options
       When The user clicks on "Add Event" button
       And The user can click "Repeat" button
@@ -47,3 +46,7 @@
         | Never |
         | After |
         | By    |
+
+
+      Scenario: AC - User can see events in General Info page
+        Then The user can see all the events of related row-vehicle

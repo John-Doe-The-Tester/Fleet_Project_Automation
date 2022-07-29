@@ -70,4 +70,9 @@ public class AddEventStepDef {
 	public void theUserCanClickAnyOfTheEndingOptionsBelow(List<String> endingOptions) {
 		addEventPage.clickEndingOptions(endingOptions);
 	}
+
+	@Then("The user can see all the events of related row-vehicle")
+	public void theUserCanSeeAllTheEventsOfRelatedRowVehicle() {
+		generalInfoPage.isEventsDisplayed();
+	}
 }
