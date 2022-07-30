@@ -91,7 +91,7 @@ public class VehicleAllCarsPage extends BasePage {
 	}
 
 	public void clickColumn(String column){
-		WebElement columnWE = driver.findElement(By.xpath("//*[text()='" + column + "']"));
+		WebElement columnWE = Driver.get().findElement(By.xpath("//*[text()='" + column + "']"));
 		BrowserUtils.clickWithJSExe(columnWE);
 		BrowserUtils.wait(1);
 	}

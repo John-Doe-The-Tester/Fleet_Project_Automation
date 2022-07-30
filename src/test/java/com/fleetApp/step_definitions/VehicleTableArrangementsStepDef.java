@@ -2,6 +2,7 @@ package com.fleetApp.step_definitions;
 
 import com.fleetApp.pages.VehicleAllCarsPage;
 import com.fleetApp.utilities.BrowserUtils;
+import com.sun.source.tree.TryTree;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
@@ -47,6 +48,11 @@ public class VehicleTableArrangementsStepDef {
 
 	@When("The user clicks on {string} column in the table")
 	public void the_user_clicks_on_column_in_the_table(String columnName) {
+		try {
+			Thread.sleep(1000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		vehicleAllCarsPage.clickColumn(columnName);
 	}
 
