@@ -46,4 +46,9 @@ Feature: Add Event
 
 
   @wip
-  Scenario: AC 5- Remove sortings by reset button
+  Scenario: AC 5- Remove all sortings by reset button
+    When The user clicks on "<column>" column in the table
+    Then The "<column>" column is sorted in "<order1>" order
+
+    When The user clicks on "Reset" button
+    Then The "<column>" gets reset

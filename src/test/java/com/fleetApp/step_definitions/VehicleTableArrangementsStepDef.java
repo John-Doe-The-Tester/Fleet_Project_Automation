@@ -48,11 +48,6 @@ public class VehicleTableArrangementsStepDef {
 
 	@When("The user clicks on {string} column in the table")
 	public void the_user_clicks_on_column_in_the_table(String columnName) {
-		try {
-			Thread.sleep(1000);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		vehicleAllCarsPage.clickColumn(columnName);
 	}
 
@@ -64,6 +59,16 @@ public class VehicleTableArrangementsStepDef {
 	@Then("The {string} column is sorted in {string} order")
 	public void the_column_is_sorted_in_order(String columnName, String order) {
 		vehicleAllCarsPage.isColumnSorted(columnName,order);
+	}
+
+	@When("The user clicks on {string} button")
+	public void the_user_clicks_on_button(String button) {
+		vehicleAllCarsPage.clickRightTopButtons(button);
+	}
+
+	@Then("The table gets reset")
+	public void the_table_gets_reset() {
+
 	}
 
 }

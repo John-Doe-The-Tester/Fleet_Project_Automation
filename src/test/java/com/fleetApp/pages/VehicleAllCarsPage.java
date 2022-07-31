@@ -126,4 +126,9 @@ public class VehicleAllCarsPage extends BasePage {
 		}
 	}
 
+	public void clickRightTopButtons(String button){
+		WebElement buttonWE = driver.findElement(By.cssSelector("a[title='"+button+"']"));
+		BrowserUtils.clickWithWait(buttonWE,2);
+	}
+
 }
