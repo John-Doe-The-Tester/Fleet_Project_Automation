@@ -4,6 +4,7 @@ import com.fleetApp.utilities.BrowserUtils;
 import com.fleetApp.utilities.Driver;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -27,6 +28,27 @@ public class VehicleAllCarsPage extends BasePage {
 
 	@FindBy(css = "td[data-column-label='Model Year']")
 	private List<WebElement> allYears;
+
+	@FindBy(xpath = "//label[@class='dib'][2]")
+	private WebElement totalPage;
+
+	@FindBy(xpath = "//label[@class='dib'][3]")
+	private WebElement totalRecording;
+
+	@FindBy(css = "a[data-grid-pagination-direction='next']")
+	private WebElement nextPageBtn;
+
+	@FindBy(css = "a[data-grid-pagination-direction='prev']")
+	private WebElement previousPageBtn;
+
+	@FindBy(css = "input[type='number']")
+	private WebElement currentPageNumberWE;
+
+	@FindBy(css = "div.extra-actions-panel")
+	private WebElement exportGrid;
+
+	@FindBy(css = "div.message")
+	private WebElement csvXlsxSuccess;
 
 
 	public void clickAnyRow() {
@@ -92,22 +114,17 @@ public class VehicleAllCarsPage extends BasePage {
 
 	public void clickColumn(String column){
 		WebElement columnWE = Driver.get().findElement(By.xpath("//*[text()='" + column + "']"));
+		BrowserUtils.waitClickability(columnWE,5);
 		BrowserUtils.clickWithJSExe(columnWE);
 		BrowserUtils.wait(1);
 	}
 
 	public void isColumnSorted(String column, String order){
-		List<WebElement> actualValuesWE = driver.findElements(By.cssSelector("td[data-column-label='" + column + "']"));
+		List<String> actualValuesString = saveColumnOrder(column);
 		List<String> expetedValuesString = new ArrayList<>();
-		List<String> actualValuesString = new ArrayList<>();
 
-		//get text of each value and pass another list as a string
-		for (int i = 0; i < actualValuesWE.size(); i++) {
-			BrowserUtils.waitForVisibility(actualValuesWE.get(i),1);
-			actualValuesString.add(actualValuesWE.get(i).getText());
-			//create another list which is just a copy of curent list
-			expetedValuesString = new ArrayList<>(actualValuesString);
-		}
+		//create another list which is just a copy of curent list
+		expetedValuesString = new ArrayList<>(actualValuesString);
 
 		if (order.toLowerCase().equals("ascending")) {
 			//sort in ascending order
@@ -126,9 +143,101 @@ public class VehicleAllCarsPage extends BasePage {
 		}
 	}
 
+	public List<String> saveColumnOrder(String column){
+		List<WebElement> actualValuesWE = driver.findElements(By.cssSelector("td[data-column-label='" + column + "']"));
+		List<String> actualValuesString = new ArrayList<>();
+
+		//get text of each value and pass another list as a string
+		for (int i = 0; i < actualValuesWE.size(); i++) {
+			BrowserUtils.waitForVisibility(actualValuesWE.get(i),1);
+			actualValuesString.add(actualValuesWE.get(i).getText());
+		}
+
+		return actualValuesString;
+	}
+
 	public void clickRightTopButtons(String button){
 		WebElement buttonWE = driver.findElement(By.cssSelector("a[title='"+button+"']"));
 		BrowserUtils.clickWithWait(buttonWE,2);
+		BrowserUtils.wait(0.7);
 	}
+
+	public void isDisplayedTotalPage(){
+		BrowserUtils.waitForVisibility(totalPage,5);
+		Assert.assertTrue(totalPage.isDisplayed());
+	}
+	public void isDisplayedTotalRecordings(){
+		BrowserUtils.waitForVisibility(totalRecording,5);
+		Assert.assertTrue(totalRecording.isDisplayed());
+	}
+
+	public void clickNextPreviousPageBtn(String direction){
+		switch (direction) {
+			case "next":
+				nextPageBtn.click();
+				break;
+
+			case "previous":
+				previousPageBtn.click();
+				break;
+		}
+	}
+
+	public String getCurrentPageNumberWE(){
+		BrowserUtils.waitClickability(currentPageNumberWE,5);
+		return currentPageNumberWE.getAttribute("value");
+	}
+
+	public void isEnabledNextPreviousBtn(String direction, String currentPageNumber){
+		System.out.println("current page number from method: " + currentPageNumber);
+
+		switch (direction) {
+			case "previous":
+				if (currentPageNumber.trim().equals("1")) {
+					BrowserUtils.wait(10);
+					System.out.println("if is true");
+					Assert.assertFalse(previousPageBtn.isEnabled());
+				}
+				break;
+
+			case "next":
+				BrowserUtils.wait(1);
+				String lastPage = totalPage.getText().split(" ")[1].trim();
+				System.out.println("last page: " + lastPage);
+				if (currentPageNumber.equals(lastPage)) {
+					Assert.assertTrue(!nextPageBtn.isEnabled());
+				}
+				break;
+		}
+
+
+	}
+
+	public void gotoLastPage(){
+		String lastPage = totalPage.getText().split(" ")[1].trim();
+		System.out.println("last page: " + lastPage);
+		BrowserUtils.waitClickability(currentPageNumberWE,5);
+		currentPageNumberWE.clear();
+		currentPageNumberWE.sendKeys(lastPage, Keys.ENTER);
+	}
+
+	public void gotoFirstPage(){
+		BrowserUtils.waitClickability(currentPageNumberWE,5);
+		currentPageNumberWE.clear();
+		currentPageNumberWE.sendKeys("1", Keys.ENTER);
+	}
+
+	public void downloadDataCSVorXLSX(String type){
+		BrowserUtils.clickWithWait(exportGrid,5);
+		WebElement typeWE = driver.findElement(By.cssSelector("a[title='" + type + "']"));
+		BrowserUtils.clickWithWait(typeWE,2);
+	}
+
+	public void downloadCSVorXLSXsuccess(){
+		BrowserUtils.waitForVisibility(csvXlsxSuccess,5);
+		Assert.assertTrue(csvXlsxSuccess.isDisplayed());
+	}
+
+
 
 }

@@ -3,6 +3,7 @@ package com.fleetApp.step_definitions;
 import com.fleetApp.pages.VehicleAllCarsPage;
 import com.fleetApp.utilities.BrowserUtils;
 import com.sun.source.tree.TryTree;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
@@ -12,6 +13,8 @@ import java.util.List;
 public class VehicleTableArrangementsStepDef {
 
 	private VehicleAllCarsPage vehicleAllCarsPage = new VehicleAllCarsPage();
+	private List<String> defaultOrder1;
+	private List<String> defaultOrder2;
 
 	@When("The user looks at the View Per Page")
 	public void the_user_looks_at_the_view_per_page() {
@@ -61,14 +64,22 @@ public class VehicleTableArrangementsStepDef {
 		vehicleAllCarsPage.isColumnSorted(columnName,order);
 	}
 
-	@When("The user clicks on {string} button")
-	public void the_user_clicks_on_button(String button) {
+	@When("The user clicks on {string} button from the top right menu")
+	public void the_user_clicks_on_button_from_the_top_right_menu(String button) {
 		vehicleAllCarsPage.clickRightTopButtons(button);
 	}
 
-	@Then("The table gets reset")
-	public void the_table_gets_reset() {
 
+	@And("The user saves the default order of {string}")
+	public void theUserSavesTheDefaultOrderOf(String column) {
+		defaultOrder1 = vehicleAllCarsPage.saveColumnOrder(column);
 	}
+
+	@Then("The {string} gets reset to default order")
+	public void theGetsResetToDefaultOrder(String column) {
+		defaultOrder2 = vehicleAllCarsPage.saveColumnOrder(column);
+		Assert.assertEquals(defaultOrder1,defaultOrder2);
+	}
+
 
 }
