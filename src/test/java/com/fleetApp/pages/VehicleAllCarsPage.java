@@ -60,6 +60,13 @@ public class VehicleAllCarsPage extends BasePage {
 	@FindBy(css = "ul.dropdown-menu.dropdown-menu__action-cell.launchers-dropdown-menu.detach.dropdown-menu__floating")
 	private WebElement threeDotsDivMenu;
 
+	@FindBy(css = "a[title='Grid Settings']")
+	private WebElement gridSettingsBtn;
+
+	@FindBy(css = "a[title='Reset']")
+	private WebElement resetBtn;
+
+
 
 	public void clickAnyRow() {
 		//click any row with actions class
@@ -93,7 +100,6 @@ public class VehicleAllCarsPage extends BasePage {
 	}
 
 	public void selectAllOptionsViewPerPage(List<String> expectedOptions){
-
 		for (int i = 0; i < viewPerPageOptions.size(); i++) {
 			clickViewPerPage();
 
@@ -103,11 +109,10 @@ public class VehicleAllCarsPage extends BasePage {
 			//verify  if selected
 			BrowserUtils.wait(1);
 			Assert.assertEquals(expectedOptions.get(i),viewPerPage.getText());
-
 		}
 	}
 
-	public void selectOptionViewPerPage(String option){
+	public void selectSingleOptionViewPerPage(String option){
 		BrowserUtils.clickWithWait(viewPerPage,5);
 		BrowserUtils.wait(1);
 		WebElement optionWE = driver.findElement(By.xpath("//a[@class='dropdown-item'][text()[normalize-space() ='" + option + "']]"));
@@ -168,9 +173,17 @@ public class VehicleAllCarsPage extends BasePage {
 	}
 
 	public void clickRightTopButtons(String button){
-		WebElement buttonWE = driver.findElement(By.cssSelector("a[title='"+button+"']"));
-		BrowserUtils.clickWithWait(buttonWE,2);
-		BrowserUtils.wait(0.7);
+		BrowserUtils.wait(0.5);
+		switch (button.toLowerCase()) {
+			case "reset":
+				BrowserUtils.clickWithWait(resetBtn,7);
+				break;
+
+			case "grid settings":
+				BrowserUtils.clickWithWait(gridSettingsBtn,7);
+				break;
+		}
+
 	}
 
 	public void isDisplayedTotalPage(){

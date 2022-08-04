@@ -1,8 +1,6 @@
 package com.fleetApp.step_definitions;
 
 import com.fleetApp.pages.VehicleAllCarsPage;
-import com.fleetApp.utilities.BrowserUtils;
-import com.sun.source.tree.TryTree;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -41,7 +39,7 @@ public class VehicleTableArrangementsStepDef {
 
 	@When("The user selects the {string} from View Per Page")
 	public void the_user_selects_the_from_View_Per_Page(String option) {
-		vehicleAllCarsPage.selectOptionViewPerPage(option);
+		vehicleAllCarsPage.selectSingleOptionViewPerPage(option);
 	}
 
 	@Then("The user should see {string} results on the page")
@@ -66,9 +64,9 @@ public class VehicleTableArrangementsStepDef {
 
 	@When("The user clicks on {string} button from the top right menu")
 	public void the_user_clicks_on_button_from_the_top_right_menu(String button) {
+		vehicleAllCarsPage.waitUntilLoaderScreenDisappear();
 		vehicleAllCarsPage.clickRightTopButtons(button);
 	}
-
 
 	@And("The user saves the default order of {string}")
 	public void theUserSavesTheDefaultOrderOf(String column) {
