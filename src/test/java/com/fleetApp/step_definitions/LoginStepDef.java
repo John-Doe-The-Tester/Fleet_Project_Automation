@@ -5,8 +5,6 @@ import com.fleetApp.pages.HomePage;
 import com.fleetApp.pages.LoginPage;
 import com.fleetApp.utilities.BrowserUtils;
 import com.fleetApp.utilities.Driver;
-import com.sun.source.tree.AssertTree;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -84,14 +82,14 @@ public class LoginStepDef {
 
 	@When("Paste the copied URL to the browser")
 	public void paste_the_copied_url_to_the_browser() {
-		Driver.get().navigate().to(currentURL);
+		Driver.getDriver().navigate().to(currentURL);
 	}
 
 
 	@Then("The user is still on the login page")
 	public void the_user_is_still_on_the_login_page() {
 		BrowserUtils.waitForURLContains("login",5);
-		currentURL = Driver.get().getCurrentUrl();
+		currentURL = Driver.getDriver().getCurrentUrl();
 		System.out.println("current URL is: " + currentURL);
 
 		Assert.assertTrue(currentURL.contains("login"));
@@ -144,7 +142,7 @@ public class LoginStepDef {
 
 	@Then("The user lands on the {string} page")
 	public void the_user_lands_on_the_page(String pageTitle) {
-		Assert.assertEquals(pageTitle, Driver.get().getTitle());
+		Assert.assertEquals(pageTitle, Driver.getDriver().getTitle());
 	}
 
 	@When("The user enters any username {string} and clicks on request btn")
@@ -173,7 +171,7 @@ public class LoginStepDef {
 	public void the_user_logs_out_and_go_to_login_page_again() {
 		BrowserUtils.openNewTab();
 		homePage.logOut();
-		Driver.get().close();
+		Driver.getDriver().close();
 		BrowserUtils.switchToWindow(0);
 		loginPage.goLoginPage();
 	}

@@ -86,8 +86,8 @@ public class VehicleTableViewStepDef {
 		vehicleAllCarsPage.isDisplayedTotalRecordings();
 	}
 
-	@When("The user donwloads the data as a {string} file")
-	public void the_user_donwloads_the_data_as_a_file(String type) {
+	@When("The user downloads the data as a {string} file")
+	public void the_user_downloads_the_data_as_a_file(String type) {
 		vehicleAllCarsPage.downloadDataCSVorXLSX(type);
 	}
 

@@ -5,7 +5,6 @@ import com.fleetApp.utilities.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -18,7 +17,7 @@ public abstract class BasePage {
 
 	//constructor
 	BasePage() {
-		this.driver = Driver.get();
+		this.driver = Driver.getDriver();
 		PageFactory.initElements(driver, this);
 	}
 
@@ -30,7 +29,7 @@ public abstract class BasePage {
 
 	public void waitUntilLoaderScreenDisappear() {
 		try {
-			WebDriverWait wait = new WebDriverWait(Driver.get(), 10);
+			WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
 			wait.until(ExpectedConditions.invisibilityOf(loaderMask));
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
@@ -16,6 +17,9 @@ public class VehicleAllCarsPage extends BasePage {
 
 	@FindBy(xpath = "//tr[@class='grid-row row-click-action'][5]")
 	private WebElement anyRow;
+
+	@FindBy(xpath = "//tr[@class='grid-row row-click-action'][5]//td")
+	private List<WebElement> carInfoOfAnyRow;
 
 	@FindBy(css = "tr.grid-row")
 	private List<WebElement> allRows;
@@ -50,21 +54,28 @@ public class VehicleAllCarsPage extends BasePage {
 	@FindBy(css = "div.message")
 	private WebElement csvXlsxSuccess;
 
+	@FindBy(xpath = "(//div[@class='dropdown']//*[text()='...'])[5]")
+	private WebElement threeDots;
+
+	@FindBy(css = "ul.dropdown-menu.dropdown-menu__action-cell.launchers-dropdown-menu.detach.dropdown-menu__floating")
+	private WebElement threeDotsDivMenu;
+
 
 	public void clickAnyRow() {
-		//try to click the row three times
-		//we use try-catch block with a for loop
-		//because sometimes we might have a problem
-		//clicking the row from the table
+		//click any row with actions class
+		BrowserUtils.clickWithMouseHoverAction(anyRow);
 
-		for (int i = 0; i < 3; i++) {
-			try {
-				BrowserUtils.waitClickability(anyRow, 2);
-				anyRow.click();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+		//regular click method sometimes doesn't work
+		//it works when we click twice
+//		for (int i = 0; i < 2; i++) {
+//			try {
+//				BrowserUtils.waitClickability(anyRow, 2);
+//				anyRow.click();
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		}
+
 	}
 
 	public void clickViewPerPage(){
@@ -113,7 +124,7 @@ public class VehicleAllCarsPage extends BasePage {
 	}
 
 	public void clickColumn(String column){
-		WebElement columnWE = Driver.get().findElement(By.xpath("//*[text()='" + column + "']"));
+		WebElement columnWE = Driver.getDriver().findElement(By.xpath("//*[text()='" + column + "']"));
 		BrowserUtils.waitClickability(columnWE,5);
 		BrowserUtils.clickWithJSExe(columnWE);
 		BrowserUtils.wait(1);
@@ -210,7 +221,6 @@ public class VehicleAllCarsPage extends BasePage {
 				break;
 		}
 
-
 	}
 
 	public void gotoLastPage(){
@@ -238,6 +248,42 @@ public class VehicleAllCarsPage extends BasePage {
 		Assert.assertTrue(csvXlsxSuccess.isDisplayed());
 	}
 
+	public void clickThreeDotMenuButtons(String btn){
+		WebElement btnWE = driver.findElement(By.xpath("//li[@class='launcher-item']//*[@title='"+btn+"']"));
+		BrowserUtils.clickWithWait(btnWE,2);
+	}
 
+	public void hoverOverThreeDots(){
+		Actions actions = new Actions(driver);
+		//web element receives the mouse event in second attempt
+		//we try twice
+		try {
+			for (int i = 0; i < 2; i++) {
+				actions.moveToElement(threeDots).pause(100).build().perform();
+				BrowserUtils.wait(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+
+	}
+
+	public List<String> getCarInfoFromRow(){
+		List<String> allInfoString = new ArrayList<>();
+		List<WebElement> allInfoWE = this.carInfoOfAnyRow;
+		BrowserUtils.wait(1);
+
+		//don't include the first and last values cause it's not relevant
+		for (int i = 1; i < allInfoWE.size()-1; i++) {
+			if (allInfoWE.get(i).getText().contains(",")) {
+				allInfoString.add(allInfoWE.get(i).getText().replace(",",""));
+				continue;
+			}
+			allInfoString.add(allInfoWE.get(i).getText());
+		}
+
+		return allInfoString;
+	}
 
 }

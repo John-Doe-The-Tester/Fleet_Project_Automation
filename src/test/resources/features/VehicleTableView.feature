@@ -30,10 +30,10 @@ Feature: Vehicle Table View
 
   @wip
   Scenario: AC 4- User can download the data
-    When The user donwloads the data as a "CSV" file
+    When The user downloads the data as a "CSV" file
     Then The user gets a success message
 
-    When The user donwloads the data as a "XLSX" file
+    When The user downloads the data as a "XLSX" file
     Then The user gets a success message
 
 

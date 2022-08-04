@@ -24,3 +24,4 @@
 #4- User can select any column by clicking the column name
 #5- User can arrange the order of the columns (by dragging and dropping)
 #6- User can see all corresponding changes under 'Fleet-Vehicles' pages
+

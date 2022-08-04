@@ -27,7 +27,6 @@ public class AddEventStepDef {
 		homePage.waitUntilLoaderScreenDisappear();
 	}
 
-
 	@When("The user clicks on any row on the Vehicle - All Cars page")
 	public void the_user_clicks_on_any_row_on_the_vehicle_all_cars_page() {
 		vehicleAllCarsPage.clickAnyRow();
