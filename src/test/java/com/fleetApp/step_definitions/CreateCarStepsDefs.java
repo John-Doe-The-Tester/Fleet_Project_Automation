@@ -13,7 +13,7 @@ public class CreateCarStepsDefs {
 
     @And("the user navigates to {string} {string}")
     public void theUserNavigatesTo(String tab, String module) {
-        dashboardPage.goToModule(tab, module);
+        dashboardPage.navigateToModule(tab, module);
 
     }
 

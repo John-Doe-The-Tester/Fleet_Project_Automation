@@ -13,5 +13,5 @@ import org.junit.runner.RunWith;
 		glue = "com/fleetApp/step_definitions"
 )
 
-public class FailedTestRunner {
+public class FailedMyClassRunner {
 }

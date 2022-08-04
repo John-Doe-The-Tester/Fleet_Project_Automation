@@ -5,7 +5,6 @@ import com.fleetApp.utilities.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -18,7 +17,7 @@ public abstract class BasePage {
 
 	//constructor
 	BasePage() {
-		this.driver = Driver.get();
+		this.driver = Driver.getDriver();
 		PageFactory.initElements(driver, this);
 	}
 
@@ -30,7 +29,7 @@ public abstract class BasePage {
 
 	public void waitUntilLoaderScreenDisappear() {
 		try {
-			WebDriverWait wait = new WebDriverWait(Driver.get(), 8);
+			WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
 			wait.until(ExpectedConditions.invisibilityOf(loaderMask));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -41,25 +40,28 @@ public abstract class BasePage {
 		return driver.getTitle();
 	}
 
-	public void goToModule(String menuName) { //Fleet
-		driver.findElement(By.xpath("//span[text()[normalize-space() = '" + menuName + "']]")).click();
+	public void navigateToModule(String menuName) { //Fleet
+		WebElement menu1 = driver.findElement(By.xpath("//span[text()[normalize-space() = '" + menuName + "']]"));
+		BrowserUtils.clickWithWait(menu1,2);
 	}
 
-	public void goToModule(String menuName, String subMenuName) { //Fleet - Vehicles
-		BrowserUtils.wait(3);
-		driver.findElement(By.xpath("//span[text()[normalize-space() = '" + menuName + "']]")).click();
-		BrowserUtils.wait(1);
-		driver.findElement(By.xpath("//span[text()[normalize-space() = '" + subMenuName + "']]")).click();
+	public void navigateToModule(String menuName, String subMenuName) { //Fleet - Vehicles
+		WebElement menu1 = driver.findElement(By.xpath("//span[text()[normalize-space() = '" + menuName + "']]"));
+		BrowserUtils.clickWithWait(menu1,2);
 
-
+		WebElement menu2 = driver.findElement(By.xpath("//span[text()[normalize-space() = '" + subMenuName + "']]"));
+		BrowserUtils.clickWithWait(menu2,2);
 	}
 
-	public void goToModule(String menuName, String subMenuName, String subSubmenu) {
-		driver.findElement(By.xpath("//span[text()[normalize-space() = '" + menuName + "']]")).click();
-		BrowserUtils.wait(1);
-		driver.findElement(By.xpath("//span[text()[normalize-space() = '" + subMenuName + "']]")).click();
-		BrowserUtils.wait(1);
-		driver.findElement(By.xpath("//span[text()[normalize-space() = '" + subSubmenu + "']]")).click();
+	public void navigateToModule(String menuName, String subMenuName, String subSubmenu) {
+		WebElement menu1 = driver.findElement(By.xpath("//span[text()[normalize-space() = '" + menuName + "']]"));
+		BrowserUtils.clickWithWait(menu1,2);
+
+		WebElement menu2 = driver.findElement(By.xpath("//span[text()[normalize-space() = '" + subMenuName + "']]"));
+		BrowserUtils.clickWithWait(menu2,2);
+
+		WebElement menu3 = driver.findElement(By.xpath("//span[text()[normalize-space() = '" + subSubmenu + "']]"));
+		BrowserUtils.clickWithWait(menu3,2);
 	}
 
 	public void goBack(){

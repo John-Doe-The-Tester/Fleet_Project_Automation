@@ -39,20 +39,20 @@ public class LogoutStepDef {
 		// we'll get NoSessionException
 		BrowserUtils.openNewTab();
 
-		Set<String> windowHandles = Driver.get().getWindowHandles();
+		Set<String> windowHandles = Driver.getDriver().getWindowHandles();
 		List<String> allOpenTabs = new ArrayList<>(windowHandles);
 
 		//allOpenTabs.size()-1 --> don't close the empty tab
 		for (int i = 0; i < allOpenTabs.size()-1; i++) {
-			Driver.get().switchTo().window(allOpenTabs.get(i));
-			Driver.get().close();
+			Driver.getDriver().switchTo().window(allOpenTabs.get(i));
+			Driver.getDriver().close();
 		}
 		BrowserUtils.switchToWindow(0);
 	}
 
 	@When("The user navigates to {string}")
 	public void the_user_navigates_to(String url) {
-		Driver.get().get(url);
+		Driver.getDriver().get(url);
 	}
 
 	@When("The user is inactive for {int} minutes consecutively")

@@ -144,7 +144,7 @@ public class CreateCarPage extends BasePage {
         String date1 = month[random.nextInt(11) + 1] + " " + (random.nextInt(29) + 1) + ", " + (random.nextInt(40) + 1980);
         String date2 = month[random.nextInt(11) + 1] + " " + (random.nextInt(29) + 1) + ", " + (random.nextInt(40) + 1980);
 
-        Driver.get().navigate().refresh();
+        Driver.getDriver().navigate().refresh();
         licence_plate_inputbox.sendKeys(faker.bothify("##????").toUpperCase());
         myTags.get(random.nextInt(7)).click();
         driver_inputbox.sendKeys(faker.name().fullName());
@@ -162,10 +162,10 @@ public class CreateCarPage extends BasePage {
         doorsNumber_inputbox.sendKeys(random.nextInt(5) + 2 + "");
         color_inputbox.sendKeys(StringUtils.capitalize(faker.color().name()));
         transmission.click();
-        Driver.get().findElements(By.xpath("/html/body/div[8]/ul[2]/li")).get(random.nextInt(2)).click();
+        Driver.getDriver().findElements(By.xpath("/html/body/div[8]/ul[2]/li")).get(random.nextInt(2)).click();
         Thread.sleep(1000);
         fuelType.click();
-        Driver.get().findElements(By.xpath("/html/body/div[9]/ul[2]/li")).get(random.nextInt(4)).click();
+        Driver.getDriver().findElements(By.xpath("/html/body/div[9]/ul[2]/li")).get(random.nextInt(4)).click();
         emissions_inputbox.sendKeys(random.nextInt(9 - 1) * 0.1 + "");
         horsePower_inputbox.sendKeys(random.nextInt(180) + 120 + "");
         horsePowerTaxation_inputbox.sendKeys(random.nextInt(9 - 1) * 0.1 + "");

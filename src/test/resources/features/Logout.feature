@@ -20,7 +20,7 @@ Feature: Logout
     And The user navigates to "https://qa.perfleet.com/"
     Then The user ends up in "Login" page
 
-  @wip
+
   #This scenario will fail because nothing happens after 3 minutes
   Scenario: AC-4: AFK for three minutes
     When The user is inactive for 3 minutes consecutively
