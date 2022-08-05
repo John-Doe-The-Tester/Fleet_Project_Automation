@@ -66,6 +66,9 @@ public class VehicleAllCarsPage extends BasePage {
 	@FindBy(css = "a[title='Reset']")
 	private WebElement resetBtn;
 
+	@FindBy(css = "thead.grid-header th")
+	private List<WebElement> allColumns;
+
 
 
 	public void clickAnyRow() {
@@ -297,6 +300,17 @@ public class VehicleAllCarsPage extends BasePage {
 		}
 
 		return allInfoString;
+	}
+
+	public List<String> getVehicleTableColumnOrder(){
+		List<String> allColumnsString = new ArrayList<>();
+		BrowserUtils.wait(0.5);
+
+		for (int i = 1; i < allColumns.size()-1; i++) {
+			allColumnsString.add(allColumns.get(i).getText());
+		}
+
+		return allColumnsString;
 	}
 
 }

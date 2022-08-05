@@ -71,9 +71,9 @@ Feature: Grid Settings
       | Last Odometer |
       | Seats Number  |
       | Color         |
-    Then The relevant column shows up
+    Then The relevant column shows up in the grid settings
 
-  @wip
+
   Scenario: AC3- "Quick Search" Partial Search
     When The user types following column names into quick search field
       | Dri      |
@@ -88,7 +88,49 @@ Feature: Grid Settings
       | Ca       |
       | A        |
       | B        |
-    Then The relevant column shows up
+    Then The relevant column shows up in the grid settings
+
+
+  Scenario: AC4- Click on the column name
+    When The user clicks on the following columns from grid settings
+      | Driver        |
+      | Tags          |
+      | License Plate |
+      | Model Year    |
+      | Last Odometer |
+      | Seats Number  |
+      | Color         |
+    Then The relevant column shows up in the fleet - vehicles table
+
+
+  Scenario: AC5- Drag and drop columns
+    When The user can drag "Driver" column and drop to the index 1
+    Then "Driver" column is positioned at index 1
+
+    When The user can drag "Location" column and drop to the index 2
+    Then "Location" column is positioned at index 2
+
+    When The user can drag "Model Year" column and drop to the index 3
+    Then "Model Year" column is positioned at index 3
+
+
+  @wip
+  Scenario: AC6- User can see all corresponding changes
+    When The user clicks on the following columns from grid settings
+      | Driver        |
+      | Tags          |
+      | License Plate |
+      | Model Year    |
+      | Last Odometer |
+      | Seats Number  |
+      | Color         |
+      | Id            |
+
+    And The user can drag "Id" column and drop to the index 1
+    And The user can drag "License Plate" column and drop to the index 2
+    And The user can drag "Driver" column and drop to the index 3
+    And The user can drag "Color" column and drop to the index 4
+    Then The user can see the same order in the fleet vehicle table as in the grid settings
 
 
 
