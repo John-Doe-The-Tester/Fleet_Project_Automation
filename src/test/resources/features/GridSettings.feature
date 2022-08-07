@@ -103,6 +103,7 @@ Feature: Grid Settings
     Then The relevant column shows up in the fleet - vehicles table
 
 
+
   Scenario: AC5- Drag and drop columns
     When The user can drag "Driver" column and drop to the index 1
     Then "Driver" column is positioned at index 1
@@ -112,6 +113,7 @@ Feature: Grid Settings
 
     When The user can drag "Model Year" column and drop to the index 3
     Then "Model Year" column is positioned at index 3
+
 
 
   @wip
