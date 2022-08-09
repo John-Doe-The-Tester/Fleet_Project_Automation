@@ -11,7 +11,6 @@ Feature: Vehicle General Information
   5- Vehicle information displayed on the "General Information" page and "Fleet-Vehicle" page should be the same
 
 
-  @wip
   Scenario: AC1- General Info page by clicking any row
     Given The user is on the login page
     And The user logs in as a "sales manager"
@@ -29,7 +28,6 @@ Feature: Vehicle General Information
     And The user clicks on the "View" icon
     Then The user is on the General Information page
 
-  @wip
   Scenario Outline: AC3- Sales manager and store manager should see "Edit", "Delete" and "Add Event" buttons
     Given The user is on the login page
     And The user logs in as a "<user type>"
@@ -42,7 +40,6 @@ Feature: Vehicle General Information
       | Sales Manager |
       | Store Manager |
 
-  @wip
 #    This cenatio fails cause driver can see the add event btn
   Scenario: AC4- truck driver shouldn't see "Edit", "Delete" and "Add Event" buttons
     Given The user is on the login page
