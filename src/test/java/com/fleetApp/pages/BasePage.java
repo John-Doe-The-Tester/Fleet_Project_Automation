@@ -29,7 +29,7 @@ public abstract class BasePage {
 
 	public void waitUntilLoaderScreenDisappear() {
 		try {
-			WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+			WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 20);
 			wait.until(ExpectedConditions.invisibilityOf(loaderMask));
 		} catch (Exception e) {
 			e.printStackTrace();
