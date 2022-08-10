@@ -95,3 +95,45 @@ Feature: Login
       | password | UserUser123     |
     When The user clicks on profile menu
     Then The user can see his own username "salesmanager101" in the profile menu
+
+# additional scenarious
+  Scenario: The leading and trailing spaces entered into the Username field are trimmed
+    When The user tries to login with "        storemanager51     " and "UserUser123"
+    Then The user is on the "Dashboard" page
+
+
+  Scenario: All the fields in the Login page have the proper placeholders
+    Then Username and password input boxes have proper placeholders
+
+
+  Scenario: Color  of "LOGIN"  button
+    Then the user should see the background color of "LOGIN" button as "#0c84a3"
+
+
+  Scenario: Copying of the text entered into the Password field
+    Given the user enters valid credentials to password input box
+    Then the system should not allow user to copy password
+
+
+  Scenario: Password is not visible in the Page Source
+    Given the user enters valid credentials to password input box
+    Then the password is not visible in the Page Source
+
+  @wipp
+  Scenario Outline: Breadcrumb, Page Heading, Page URL, Page Title and Modules of 'Dashboard Page'
+    When The user tries to login with "storemanager51" and "UserUser123"
+    Then the user should see following modules
+      | Dashboards         |
+      | Fleet              |
+      | Customers          |
+      | Sales              |
+      | Activities         |
+      | Marketing          |
+      | Reports & Segments |
+      | System             |
+
+    * Page element  "<Breadcrumb>"  "<Page Heading>"  "<Page URL>"  "<Page Title>" is as expected
+
+    Examples:
+      | Breadcrumb            | Page Heading | Page URL                  | Page Title |
+      | Dashboards/ Dashboard | Dashboard    | https://qa.navfort.com/ | Dashboard  |
