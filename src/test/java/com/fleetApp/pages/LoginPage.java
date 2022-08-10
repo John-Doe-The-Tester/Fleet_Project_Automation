@@ -12,13 +12,13 @@ public class LoginPage extends BasePage {
 	//---locators----------------
 
 	@FindBy(id = "prependedInput")
-	private WebElement usernameField;
+	public WebElement usernameField;
 
 	@FindBy(id = "prependedInput2")
-	private WebElement passwordField;
+	public WebElement passwordField;
 
 	@FindBy(id = "_submit")
-	private WebElement loginBtn;
+	public WebElement loginBtn;
 
 	@FindBy(css = ".alert.alert-error")
 	private WebElement invalidCredenrialMessage;

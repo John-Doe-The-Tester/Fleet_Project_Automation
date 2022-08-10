@@ -11,9 +11,18 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 public abstract class BasePage {
 
 	protected WebDriver driver;
+
+	@FindBy(css = "span.title-level-1")
+	public List<WebElement> menuOptions;
+
+	@FindBy(css = ".oro-subtitle")
+	public WebElement pageSubTitle;
+
 
 	//constructor
 	BasePage() {
@@ -29,7 +38,7 @@ public abstract class BasePage {
 
 	public void waitUntilLoaderScreenDisappear() {
 		try {
-			WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+			WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 20);
 			wait.until(ExpectedConditions.invisibilityOf(loaderMask));
 		} catch (Exception e) {
 			e.printStackTrace();
