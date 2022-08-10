@@ -24,6 +24,7 @@ public class BrowserUtils {
     }
 
 
+
     public static String getURL(){
         return Driver.getDriver().getCurrentUrl();
     }

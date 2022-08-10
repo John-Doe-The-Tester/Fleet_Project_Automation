@@ -3,6 +3,7 @@ package com.fleetApp.step_definitions;
 import com.fleetApp.pages.CreateCarPage;
 import com.fleetApp.pages.DashboardPage;
 import com.fleetApp.utilities.BrowserUtils;
+import com.fleetApp.utilities.CarGenerator;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 
@@ -20,12 +21,13 @@ public class CreateCarStepsDefs {
     @Then("the user clicks on Create Car button")
     public void theUserClicksOnCreateCarButton() {
         createCarPage.waitUntilLoaderScreenDisappear();
+        BrowserUtils.sleep(5);
         BrowserUtils.clickWithJSExe(createCarPage.createCarButton);
     }
 
     @And("the user enters new Car information")
     public void theUserEntersNewCarInformation() throws InterruptedException {
-        createCarPage.newCarGenerator();
+        CarGenerator.newCarGenerator();
 
     }
 
