@@ -8,7 +8,7 @@ Feature: Create Car
   Scenario: Create car as a Store Manager
     And The user logs in as a "store manager"
     And the user navigates to "Fleet" "Vehicles"
-    Then the user clicks on Create Car button
+    When the user clicks on Create Car button
     And the user enters new Car information
     Then the user clicks on save changes button
 

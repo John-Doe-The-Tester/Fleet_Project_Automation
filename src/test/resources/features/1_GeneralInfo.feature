@@ -16,7 +16,7 @@ Feature: Vehicle General Information
     And The user logs in as a "sales manager"
     And The user navigates to "Fleet" - "Vehicles" module
 
-    When The user clicks on any row on the Vehicle - All Cars page
+    When The user clicks on any row on the VehicleTable page
     Then The user is on the General Information page
 
   Scenario: AC2- General Info page by eye (view) icon
@@ -32,7 +32,7 @@ Feature: Vehicle General Information
     Given The user is on the login page
     And The user logs in as a "<user type>"
     And The user navigates to "Fleet" - "Vehicles" module
-    When The user clicks on any row on the Vehicle - All Cars page
+    When The user clicks on any row on the VehicleTable page
     Then The user can see "Edit", "Delete" and "Add Event" buttons
 
     Examples:
@@ -45,7 +45,7 @@ Feature: Vehicle General Information
     Given The user is on the login page
     And The user logs in as a "Driver"
     And The user navigates to "Fleet" - "Vehicles" module
-    When The user clicks on any row on the Vehicle - All Cars page
+    When The user clicks on any row on the VehicleTable page
     Then The user can not see "Edit", "Delete" and "Add Event" buttons
 
   @wip
@@ -54,5 +54,5 @@ Feature: Vehicle General Information
     And The user logs in as a "Sales Manager"
     And The user navigates to "Fleet" - "Vehicles" module
     When The user saves car info of any row randomly
-    And The user clicks on the same row on the Vehicle - All Cars page
+    And The user clicks on the same row on the VehicleTable page
     Then All the car info must be the same as in the General Info page

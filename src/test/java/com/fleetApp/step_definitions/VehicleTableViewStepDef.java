@@ -1,16 +1,13 @@
 package com.fleetApp.step_definitions;
 
-import com.fleetApp.pages.VehicleAllCarsPage;
-import com.fleetApp.utilities.BrowserUtils;
-import com.fleetApp.utilities.Driver;
+import com.fleetApp.pages.VehicleTablePage;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 
 public class VehicleTableViewStepDef {
 
-	private VehicleAllCarsPage vehicleAllCarsPage = new VehicleAllCarsPage();
+	private VehicleTablePage vehicleAllCarsPage = new VehicleTablePage();
 	private String currentPageNumber;
 
 	@Then("The user can see number of total pages at the top")
@@ -30,7 +27,7 @@ public class VehicleTableViewStepDef {
 		String actualPageNumber = vehicleAllCarsPage.getCurrentPageNumberWE();
 		System.out.println("initialPage: " + currentPageNumber);
 		System.out.println("actualPage: " + actualPageNumber);
-		Assert.assertTrue(Integer.valueOf(currentPageNumber) + 1 == Integer.valueOf(actualPageNumber));
+		Assert.assertEquals(Integer.parseInt(currentPageNumber) + 1, Integer.parseInt(actualPageNumber));
 	}
 
 	@Then("The user goes to previous page")
@@ -38,7 +35,7 @@ public class VehicleTableViewStepDef {
 		String actualPageNumber = vehicleAllCarsPage.getCurrentPageNumberWE();
 		System.out.println("initialPage: " + currentPageNumber);
 		System.out.println("actualPage: " + actualPageNumber);
-		Assert.assertTrue(Integer.valueOf(currentPageNumber) - 1 == Integer.valueOf(actualPageNumber));
+		Assert.assertEquals(Integer.parseInt(currentPageNumber) - 1, Integer.parseInt(actualPageNumber));
 	}
 
 	@When("The user is on the {string} page of vehicles table")

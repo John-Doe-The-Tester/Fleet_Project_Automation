@@ -15,6 +15,8 @@ import java.util.List;
 
 public abstract class BasePage {
 
+	protected static String userType;
+
 	protected WebDriver driver;
 
 	@FindBy(css = "span.title-level-1")
@@ -50,16 +52,17 @@ public abstract class BasePage {
 	}
 
 	public void navigateToModule(String menuName) { //Fleet
+
 		WebElement menu1 = driver.findElement(By.xpath("//span[text()[normalize-space() = '" + menuName + "']]"));
 		BrowserUtils.clickWithWait(menu1,2);
 	}
 
 	public void navigateToModule(String menuName, String subMenuName) { //Fleet - Vehicles
-		WebElement menu1 = driver.findElement(By.xpath("//span[text()[normalize-space() = '" + menuName + "']]"));
-		BrowserUtils.clickWithWait(menu1,2);
+		By menuLocator = By.xpath("//span[text()[normalize-space() = '" + menuName + "']]");
+		BrowserUtils.clickWithWait(menuLocator,2);
 
-		WebElement menu2 = driver.findElement(By.xpath("//span[text()[normalize-space() = '" + subMenuName + "']]"));
-		BrowserUtils.clickWithWait(menu2,2);
+		By subMenuLocator = By.xpath("//span[text()[normalize-space() = '" + subMenuName + "']]");
+		BrowserUtils.clickWithWait(subMenuLocator,2);
 	}
 
 	public void navigateToModule(String menuName, String subMenuName, String subSubmenu) {

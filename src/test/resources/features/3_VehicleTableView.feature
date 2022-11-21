@@ -36,5 +36,3 @@ Feature: Vehicle Table View
     When The user downloads the data as a "XLSX" file
     Then The user gets a success message
 
-
-

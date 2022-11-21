@@ -38,20 +38,26 @@ public class LoginPage extends BasePage {
 
 	public void loginAsUserType(String userType){
 
+		//userType variable is in BasePage
+		//it'll be used in other Scenarios
+		BasePage.userType = userType;
+
 		String password = "";
 		String username = "";
 
-		if (userType.toLowerCase().equals("driver")) {
-			username = ConfigurationReader.get("driver_username");
-			password = ConfigurationReader.get("driver_password");
-		}
-		else if (userType.toLowerCase().equals("sales manager")) {
-			username = ConfigurationReader.get("sales_manager_username");
-			password = ConfigurationReader.get("sales_manager_password");
-		}
-		else if (userType.toLowerCase().equals("store manager")) {
-			username = ConfigurationReader.get("store_manager_username");
-			password = ConfigurationReader.get("store_manager_password");
+		switch (userType.toLowerCase()) {
+			case "driver":
+				username = ConfigurationReader.get("driver_username");
+				password = ConfigurationReader.get("driver_password");
+				break;
+			case "sales manager":
+				username = ConfigurationReader.get("sales_manager_username");
+				password = ConfigurationReader.get("sales_manager_password");
+				break;
+			case "store manager":
+				username = ConfigurationReader.get("store_manager_username");
+				password = ConfigurationReader.get("store_manager_password");
+				break;
 		}
 
 		usernameField.sendKeys(username);

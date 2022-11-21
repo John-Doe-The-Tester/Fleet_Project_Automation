@@ -1,7 +1,7 @@
 package com.fleetApp.step_definitions;
 
 import com.fleetApp.pages.GridSettingsPage;
-import com.fleetApp.pages.VehicleAllCarsPage;
+import com.fleetApp.pages.VehicleTablePage;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
@@ -11,7 +11,7 @@ import java.util.List;
 public class GridSettingsStepDef {
 
 	private GridSettingsPage gridSettingsPage = new GridSettingsPage();
-	private VehicleAllCarsPage vehicleAllCarsPage = new VehicleAllCarsPage();
+	private VehicleTablePage vehicleAllCarsPage = new VehicleTablePage();
 
 	@Then("Grid Settings menu shows up")
 	public void grid_settings_menu_shows_up() {

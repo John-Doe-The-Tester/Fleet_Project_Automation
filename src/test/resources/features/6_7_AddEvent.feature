@@ -8,7 +8,7 @@
       Given The user is on the login page
       And The user logs in as a "Sales Manager"
       And The user navigates to "Fleet" - "Vehicles" module
-      And The user clicks on any row on the Vehicle - All Cars page
+      And The user clicks on any row on the VehicleTable page
 
 
       #AC1 and AC2 both are covered in this scenario

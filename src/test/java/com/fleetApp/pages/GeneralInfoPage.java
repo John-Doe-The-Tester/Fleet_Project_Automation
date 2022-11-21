@@ -23,8 +23,8 @@ public class GeneralInfoPage extends BasePage {
 
 
 	public void clickAnyBtn(String btnName) {
-		WebElement btn = Driver.getDriver().findElement(By.xpath("//*[text()[normalize-space() = '" + btnName + "']]"));
-		BrowserUtils.clickWithWait(btn, 2);
+		By btnLocaotr = By.xpath("//*[text()[normalize-space() = '" + btnName + "']]");
+		BrowserUtils.clickWithWait(btnLocaotr, 2);
 	}
 
 	public void isEventsDisplayed() {
@@ -73,7 +73,7 @@ public class GeneralInfoPage extends BasePage {
 		Assert.assertFalse(btn3WE.isDisplayed());
 	}
 
-	public List<String> getCarInfoFromGeneralInfo(){
+	public List<String> getCarInfoAsList(){
 		List<WebElement> allCarInfoWE = this.allCarInfo;
 		List<String> allCarInfoString = new ArrayList<>();
 		BrowserUtils.waitForVisibility(generalInfoPage,2);
@@ -88,6 +88,12 @@ public class GeneralInfoPage extends BasePage {
 		}
 
 		return allCarInfoString;
+	}
+
+	public String getCarInfoAsString(String carInfo){
+		By infoLocator = By.xpath("//label[@class='control-label'][text()='" + carInfo + "']/..//div[@class='control-label']");
+		BrowserUtils.waitForVisibility(infoLocator, 3);
+		return driver.findElement(infoLocator).getText();
 	}
 
 }

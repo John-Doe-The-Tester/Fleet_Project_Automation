@@ -6,6 +6,9 @@ import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends BasePage {
 
+//	@FindBy(className = "li.launcher-item a[title = 'Delete']")
+//	private WebElement threeDotsDeleteBtn;
+
 	@FindBy(className = "oro-subtitle")
 	private WebElement pageSubtitle;
 

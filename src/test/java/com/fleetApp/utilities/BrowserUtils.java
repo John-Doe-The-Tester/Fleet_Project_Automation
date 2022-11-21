@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 public class BrowserUtils {
@@ -19,7 +20,7 @@ public class BrowserUtils {
         try {
             Thread.sleep(second);
         }catch (InterruptedException e ) {
-
+            e.printStackTrace();
         }
     }
 
@@ -51,6 +52,7 @@ public class BrowserUtils {
 
     //wait for clickability of an element then click
     public static void clickWithWait(WebElement element, int timeOut){
+        waitForVisibility(element,timeOut);
         waitClickability(element,timeOut);
         element.click();
     }
@@ -72,7 +74,7 @@ public class BrowserUtils {
     }
 
     public static void sendKeysWithWait(WebElement field, String text, int timeOut){
-        waitForVisibility(field,timeOut);
+        waitClickability(field,timeOut);
         field.sendKeys(text);
     }
 
@@ -120,7 +122,7 @@ public class BrowserUtils {
     //static wait - Thread.sleep()
     public static void wait(int seconds) {
         try {
-            Thread.sleep(seconds * 1000);
+            Thread.sleep(seconds * 1000L);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -171,7 +173,6 @@ public class BrowserUtils {
     public static void switchToFrame(WebElement frame) {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 4);
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(frame));
-//		driver.switchTo().frame(frame);
     }
 
     //click on a web element using JSexecutor
@@ -193,6 +194,21 @@ public class BrowserUtils {
                 } catch (Exception ee) {
                     ee.printStackTrace();
                 }
+            }
+        }
+    }
+
+    //attempt to click on a web element a couple of times
+    public static void clickManyTimes(By locator) {
+        WebElement element = Driver.getDriver().findElement(locator);
+        waitClickability(element, 3);
+
+        for (int i = 0; i < 3; i++) {
+            try {
+                element.click();
+            } catch (Exception e) {
+                e.printStackTrace();
+                wait(1);
             }
         }
     }
@@ -232,6 +248,14 @@ public class BrowserUtils {
         List<String> elemTexts = new ArrayList<>();
         for (WebElement el : list) {
             elemTexts.add(el.getText());
+        }
+        return elemTexts;
+    }
+
+    public static List<String> getElementsTextLowerCase(List<WebElement> list) {
+        List<String> elemTexts = new ArrayList<>();
+        for (WebElement el : list) {
+            elemTexts.add(el.getText().toLowerCase());
         }
         return elemTexts;
     }

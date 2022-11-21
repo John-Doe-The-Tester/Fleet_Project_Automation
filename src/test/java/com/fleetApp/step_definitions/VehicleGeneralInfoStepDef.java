@@ -1,8 +1,7 @@
 package com.fleetApp.step_definitions;
 
 import com.fleetApp.pages.GeneralInfoPage;
-import com.fleetApp.pages.VehicleAllCarsPage;
-import com.fleetApp.utilities.BrowserUtils;
+import com.fleetApp.pages.VehicleTablePage;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
@@ -12,7 +11,7 @@ import java.util.List;
 public class VehicleGeneralInfoStepDef {
 
 	private GeneralInfoPage generalInfoPage = new GeneralInfoPage();
-	private VehicleAllCarsPage vehicleAllCarsPage = new VehicleAllCarsPage();
+	private VehicleTablePage vehicleAllCarsPage = new VehicleTablePage();
 	private List<String> allCarInfoFromRow;
 	private List<String> allCarInfoFromGeneralInfo;
 	
@@ -49,15 +48,15 @@ public class VehicleGeneralInfoStepDef {
 		vehicleAllCarsPage.waitUntilLoaderScreenDisappear();
 	}
 
-	@When("The user clicks on the same row on the Vehicle - All Cars page")
-	public void the_user_clicks_on_thw_same_row_on_the_vehicle_all_cars_page() {
+	@When("The user clicks on the same row on the VehicleTable page")
+	public void the_user_clicks_on_thw_same_row_on_the_vehicleTable_page() {
 		vehicleAllCarsPage.clickAnyRow();
 		vehicleAllCarsPage.waitUntilLoaderScreenDisappear();
 	}
 
 	@Then("All the car info must be the same as in the General Info page")
 	public void all_the_car_info_must_be_the_same_as_in_the_General_Info_page() {
-		allCarInfoFromGeneralInfo = generalInfoPage.getCarInfoFromGeneralInfo();
+		allCarInfoFromGeneralInfo = generalInfoPage.getCarInfoAsList();
 
 		System.out.println("car info from row.........: " + allCarInfoFromRow);
 		System.out.println("car info from general info: " + allCarInfoFromGeneralInfo);
