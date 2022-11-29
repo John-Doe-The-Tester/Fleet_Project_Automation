@@ -33,8 +33,7 @@ public abstract class BasePage {
 	}
 
 	//---locators----------------
-	@FindBy(css = "div[class='loader-mask shown']")
-	@CacheLookup
+	@FindBy(xpath = "(//div[@class='loader-frame'])[last()]")
 	protected WebElement loaderMask;
 
 
@@ -52,28 +51,27 @@ public abstract class BasePage {
 	}
 
 	public void navigateToModule(String menuName) { //Fleet
-
-		WebElement menu1 = driver.findElement(By.xpath("//span[text()[normalize-space() = '" + menuName + "']]"));
-		BrowserUtils.clickWithWait(menu1,2);
+		By menuLocator = By.xpath("//span[text()[normalize-space() = '" + menuName + "']]");
+		BrowserUtils.clickWithTryCatch(menuLocator);
 	}
 
 	public void navigateToModule(String menuName, String subMenuName) { //Fleet - Vehicles
 		By menuLocator = By.xpath("//span[text()[normalize-space() = '" + menuName + "']]");
-		BrowserUtils.clickWithWait(menuLocator,2);
+		BrowserUtils.clickWithTryCatch(menuLocator);
 
 		By subMenuLocator = By.xpath("//span[text()[normalize-space() = '" + subMenuName + "']]");
-		BrowserUtils.clickWithWait(subMenuLocator,2);
+		BrowserUtils.clickWithTryCatch(subMenuLocator);
 	}
 
 	public void navigateToModule(String menuName, String subMenuName, String subSubmenu) {
-		WebElement menu1 = driver.findElement(By.xpath("//span[text()[normalize-space() = '" + menuName + "']]"));
-		BrowserUtils.clickWithWait(menu1,2);
+		By menuLocator1 = By.xpath("//span[text()[normalize-space() = '" + menuName + "']]");
+		BrowserUtils.clickWithTryCatch(menuLocator1);
 
-		WebElement menu2 = driver.findElement(By.xpath("//span[text()[normalize-space() = '" + subMenuName + "']]"));
-		BrowserUtils.clickWithWait(menu2,2);
+		By menuLocator2 = By.xpath("//span[text()[normalize-space() = '" + subMenuName + "']]");
+		BrowserUtils.clickWithTryCatch(menuLocator2);
 
-		WebElement menu3 = driver.findElement(By.xpath("//span[text()[normalize-space() = '" + subSubmenu + "']]"));
-		BrowserUtils.clickWithWait(menu3,2);
+		By menuLocator3 = By.xpath("//span[text()[normalize-space() = '" + subSubmenu + "']]");
+		BrowserUtils.clickWithTryCatch(menuLocator3);
 	}
 
 	public void goBack(){

@@ -24,7 +24,23 @@ public class BrowserUtils {
         }
     }
 
+    public static void clickWithTryCatch(By locator){
+        waitClickability(locator,5);
+        try {
+            Driver.getDriver().findElement(locator).click();
+        } catch (Exception e) {
+            try {
+                e.printStackTrace();
+                BrowserUtils.sleep(1);
+                Driver.getDriver().findElement(locator).click();
+            } catch (Exception exception) {
+                e.printStackTrace();
+                BrowserUtils.sleep(1);
+                Driver.getDriver().findElement(locator).click();
+            }
+        }
 
+    }
 
     public static String getURL(){
         return Driver.getDriver().getCurrentUrl();
